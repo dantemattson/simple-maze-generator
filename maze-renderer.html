@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dante Mattson's Maze Renderer</title>
+    <style>
+        /* resets */
+        br, #root {
+            padding: 0px;
+            margin: 0px;
+            word-spacing: -1;
+            font-size: 0;
+        }
+        /* a cell */
+        .box {
+            word-spacing: -1;
+            width: 14px;
+            height: 14px;
+            max-width: 14px;
+            max-height: 14px;
+            min-width: 14px;
+            min-height: 14px;
+            /*box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;*/
+            display: inline-block;
+            
+            padding: 0px;
+            font-size: 0;
+        }
+        /* display styling */
+        .box::after { margin-top: -10px; }
+        /* borders added modularly */
+        .u { border-top:1px black solid; }
+        .d { border-bottom:1px black solid; }
+        .l { border-left:1px black solid; }
+        .r { border-right:1px black solid; }
+    </style>
+</head>
+
+<body>
+    <button style="margin-top:15px;transform:translateY(-15px);" onclick="render()">Show</button>
+    <textarea style="width:60%;" id="ip"></textarea>
+    
+    <br>
+    <div style="margin-bottom:5px;"></div>
+    <app id="root">
+        <div class="box d r l u"></div>
+        <div class="box"></div>
+        <div class="box u d l r"></div>
+        <div class="box"></div>
+        <div class="box u l d"></div>
+        <div class="box"></div>
+        <div class="box u"></div>
+        <div class="box"></div>
+        <div class="box u d l"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box  u d l r"></div>
+        <div class="box"></div>
+        <div class="box u d l r"></div>
+        <div class="box"></div>
+        <div class="box u l r"></div>
+        <div class="box"></div>
+        <div class="box l r"></div>
+        <div class="box"></div>
+        <div class="box u l d"></div>
+        <br>
+        <div class="box l"></div>
+        <div class="box"></div>
+        <div class="box u l r"></div>
+        <div class="box"></div>
+        <div class="box u r d"></div>
+        <div class="box"></div>
+        <div class="box l"></div>
+        <div class="box"></div>
+        <div class="box u d l"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box u l r"></div>
+        <div class="box"></div>
+        <div class="box u d l r"></div>
+        <div class="box"></div>
+        <div class="box d l r"></div>
+        <div class="box"></div>
+        <div class="box d l r"></div>
+        <div class="box"></div>
+        <div class="box u l d"></div>
+    </app>
+    <script>
+        // If you're looking here, hi! :)
+        function render() {
+            // get root of "app"
+            var r = document.getElementById("root");
+            // get input
+            var i = document.getElementById("ip").value;
+
+            // clear existing cells
+            while (r.firstChild) {
+                r.removeChild(r.firstChild);
+            }
+            // for every character make the right box for it and append it
+            // on newlines, append br
+            for (var b = 0; b < i.length; b++) {
+                var temp = i[b];
+                if (temp === '0') {
+                    var n = document.createElement("div");
+                    n.classList = "box";
+                    r.appendChild(n);
+                }
+                else if (temp === '1') {
+                    var n = document.createElement("div");
+                    n.classList = "box r";
+                    n.style = "margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '2') {
+                    var n = document.createElement("div");
+                    n.classList = "box d";
+                    n.style = "margin-bottom:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '3') {
+                    var n = document.createElement("div");
+                    n.classList = "box d r";
+                    n.style = "margin-bottom:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '4') {
+                    var n = document.createElement("div");
+                    n.classList = "box l";
+                    n.style = "margin-left:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '5') {
+                    var n = document.createElement("div");
+                    n.classList = "box l r";
+                    n.style = "margin-left:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '6') {
+                    var n = document.createElement("div");
+                    n.classList = "box l d";
+                    n.style = "margin-bottom:-1px;margin-left:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '7') {
+                    var n = document.createElement("div");
+                    n.classList = "box l d r";
+                    n.style = "margin-bottom:-1px;margin-left:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '8') {
+                    var n = document.createElement("div");
+                    n.classList = "box u";
+                    n.style = "margin-top:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '9') {
+                    var n = document.createElement("div");
+                    n.classList = "box u r";
+                    n.style = "margin-top:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === 'a') {
+                    var n = document.createElement("div");
+                    n.classList = "box u d";
+                    n.style = "margin-bottom:-1px;margin-top:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === 'b') {
+                    var n = document.createElement("div");
+                    n.classList = "box u d r";
+                    n.style = "margin-bottom:-1px;margin-top:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === 'c') {
+                    var n = document.createElement("div");
+                    n.classList = "box u l";
+                    n.style = "margin-left:-1px;margin-top:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === 'd') {
+                    var n = document.createElement("div");
+                    n.classList = "box r u l";
+                    n.style = "margin-left:-1px;margin-top:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === 'e') {
+                    var n = document.createElement("div");
+                    n.classList = "box d u l";
+                    n.style = "margin-bottom:-1px;margin-left:-1px;margin-top:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === 'f') {
+                    var n = document.createElement("div");
+                    n.classList = "box d u l r";
+                    n.style = "margin-bottom:-1px;margin-left:-1px;margin-top:-1px;margin-right:-1px;";
+                    r.appendChild(n);
+                }
+                else if (temp === '\n') {
+                    var n = document.createElement("br");
+                    //n.classList = "box";
+                    r.appendChild(n);
+                }
+            }
+
+            // end of render
+        }
+
+    </script>
+</body>
+</html>
